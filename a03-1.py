@@ -1,6 +1,4 @@
 from functools import reduce
-from more_itertools import pairwise
-from pprint import pprint
 
 if __name__ == '__main__':
     with open("a03-data.txt") as file:
@@ -19,7 +17,7 @@ if __name__ == '__main__':
 
     bits = reduce(sum_tuples, rotated_lines, [])
     bits_string = ''.join(bits)
-    gamma = eval('0b' + bits_string)
+    gamma = int(bits_string, 2)
     epsilon = (~gamma & 0b111111111111)
 
     print(gamma, epsilon, gamma * epsilon)
