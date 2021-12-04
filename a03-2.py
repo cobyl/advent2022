@@ -26,10 +26,9 @@ def find_value(lines, default_value, find_type):
     for i in range(0, len(lines[0])):
         rotated_lines = list(zip(*lines[::-1]))
         try:
-            if find_type == "most_common":
-                value = mode(list(rotated_lines[i]))
-            elif find_type == "least_common":
-                value = int(not (bool(mode(list(rotated_lines[i])))))
+            value = mode(list(rotated_lines[i]))
+            if find_type == "least_common":
+                value = int(not (bool(value)))
         except ValueError:
             value = default_value
 
