@@ -18,8 +18,8 @@ def mode(list):
     return most[0]
 
 
-def convert_bin_array_to_dec(bin_string):
-    return int(''.join([str(x) for x in bin_string]), 2)
+def convert_bin_array_to_dec(bin_array):
+    return int(''.join([str(x) for x in bin_array]), 2)
 
 
 def find_value(lines, default_value, find_type):
