@@ -14,6 +14,6 @@ if __name__ == '__main__':
             aim = aim + int(num)
         if command == "forward":
             horizontal = horizontal + int(num)
-            deep = deep + aim*int(num)
+            deep = deep + aim * int(num)
 
-    print(horizontal*deep)
+    print(horizontal * deep)

@@ -1,44 +1,52 @@
 from collections import Counter
 
-if __name__ == '__main__':
+
+def read_lines_from_file():
     with open("a03-data.txt") as file:
         lines = []
         for line in file:
             lines.append([int(x) for x in line.strip()])
+    return lines
 
 
-    def mode(list):
-        data = Counter(list)
-        most = data.most_common(1)[0]
-        least = data.most_common()[-1]
-        if least[1] == most[1]:
-            raise ValueError
-        return most[0]
+def mode(list):
+    data = Counter(list)
+    most = data.most_common(1)[0]
+    least = data.most_common()[-1]
+    if least[1] == most[1]:
+        raise ValueError
+    return most[0]
 
 
-    oxygen_lines = lines
+def convert_bin_array_to_dec(bin_string):
+    return int(''.join([str(x) for x in bin_string]), 2)
+
+
+def find_value(lines, default_value, type):
     for i in range(0, len(lines[0])):
-        oxygen_rotated_lines = list(zip(*oxygen_lines[::-1]))
+        rotated_lines = list(zip(*lines[::-1]))
         try:
-            most_common = mode(list(oxygen_rotated_lines[i]))
+            if type == "most_common":
+                value = mode(list(rotated_lines[i]))
+            elif type == "least_common":
+                value = int(not (bool(mode(list(rotated_lines[i])))))
         except ValueError:
-            most_common = 1
-        oxygen_lines = list(filter(lambda x: (x[i] == most_common), oxygen_lines))
-        if len(oxygen_lines) == 1:
+            value = default_value
+
+        lines = list(filter(lambda x: (x[i] == value), lines))
+        if len(lines) == 1:
             break
+    return convert_bin_array_to_dec(lines[0])
 
-    co2_lines = lines
-    for i in range(0, len(lines[0])):
-        co2_rotated_lines = list(zip(*co2_lines[::-1]))
-        try:
-            least_common = int(not (bool(mode(list(co2_rotated_lines[i])))))
-        except ValueError:
-            least_common = 0
-        co2_lines = list(filter(lambda x: (x[i] == least_common), co2_lines))
-        if len(co2_lines) == 1:
-            break
 
-    oxygen_dec = eval('0b' + ''.join([str(x) for x in oxygen_lines[0]]))
-    co2_dec = eval('0b' + ''.join([str(x) for x in co2_lines[0]]))
+def main():
+    lines = read_lines_from_file()
 
-    print(oxygen_dec, co2_dec, oxygen_dec * co2_dec)
+    oxygen = find_value(lines, 1, "most_common")
+    co2 = find_value(lines, 0, "least_common")
+
+    print(oxygen * co2)
+
+
+if __name__ == '__main__':
+    main()

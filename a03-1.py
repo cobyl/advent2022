@@ -22,4 +22,4 @@ if __name__ == '__main__':
     gamma = eval('0b' + bits_string)
     epsilon = (~gamma & 0b111111111111)
 
-    print(gamma, epsilon, gamma*epsilon)
+    print(gamma, epsilon, gamma * epsilon)

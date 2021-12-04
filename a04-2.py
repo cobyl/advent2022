@@ -32,7 +32,7 @@ def mark_number(puzzle, number):
 
 def check_bingo(puzzle):
     def count_marked_in_row(row):
-        return reduce(lambda sum, element: sum if (element[1] is False) else sum + 1, row, 0)
+        return reduce(lambda total, element: total if (element[1] is False) else total + 1, row, 0)
 
     rotated_puzzle = list(zip(*puzzle[::-1]))
     for row in range(0, 5):
@@ -47,7 +47,7 @@ def check_bingo(puzzle):
 
 def sum_unmarked(puzzle):
     flattened_puzzle = chain.from_iterable(puzzle)
-    return reduce(lambda sum, element: sum if (element[1] is True) else sum + element[0], flattened_puzzle, 0)
+    return reduce(lambda total, element: total if (element[1] is True) else total + element[0], flattened_puzzle, 0)
 
 
 def main():
