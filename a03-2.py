@@ -11,7 +11,7 @@ if __name__ == '__main__':
         data = Counter(list)
         most = data.most_common(1)[0]
         least = data.most_common()[-1]
-        if (least[1] == most[1]):
+        if least[1] == most[1]:
             raise ValueError
         return most[0]
 
