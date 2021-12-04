@@ -22,13 +22,13 @@ def convert_bin_array_to_dec(bin_string):
     return int(''.join([str(x) for x in bin_string]), 2)
 
 
-def find_value(lines, default_value, type):
+def find_value(lines, default_value, find_type):
     for i in range(0, len(lines[0])):
         rotated_lines = list(zip(*lines[::-1]))
         try:
-            if type == "most_common":
+            if find_type == "most_common":
                 value = mode(list(rotated_lines[i]))
-            elif type == "least_common":
+            elif find_type == "least_common":
                 value = int(not (bool(mode(list(rotated_lines[i])))))
         except ValueError:
             value = default_value
