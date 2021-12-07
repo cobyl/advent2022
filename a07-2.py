@@ -31,7 +31,6 @@ def main():
     for i, cost in enumerate(costs):
         costs[i] = calculate_cost(i, crabs)
 
-
     print(min(costs))
 
 
