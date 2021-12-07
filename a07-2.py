@@ -5,21 +5,33 @@ def read_crabs_from_file():
     return fishes
 
 
+cache = []
+
+
 def calculate_cost(line, crabs):
+    global cache
     cost = 0
     for crab_line in crabs:
-        cost += sum(range(abs(crab_line - line) + 1))
+        line = abs(crab_line - line) + 1
+        if cache[line] is False:
+            line_cost = sum(range(line))
+            cache[line] = line_cost
+        else:
+            line_cost = cache[line]
+        cost += line_cost
     return cost
 
 
 def main():
+    global cache
     crabs = read_crabs_from_file()
     max_line = max(crabs)
     costs = [False] * (max_line + 1)
+    cache = [False] * (max_line + 1)
     for i, cost in enumerate(costs):
         costs[i] = calculate_cost(i, crabs)
 
-    print(costs)
+
     print(min(costs))
 
 
